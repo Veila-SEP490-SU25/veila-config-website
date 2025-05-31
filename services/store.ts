@@ -1,4 +1,4 @@
-import { authApi, profileApi, userApi } from "@/services/apis";
+import { authApi, profileApi, recordApi, userApi } from "@/services/apis";
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 
@@ -7,12 +7,14 @@ const _store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [profileApi.reducerPath]: profileApi.reducer,
+    [recordApi.reducerPath]: recordApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       authApi.middleware,
       userApi.middleware,
-      profileApi.middleware
+      profileApi.middleware,
+      recordApi.middleware
     ),
 });
 
