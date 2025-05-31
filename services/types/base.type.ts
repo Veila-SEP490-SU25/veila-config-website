@@ -20,3 +20,8 @@ export interface IErrorResponse {
   message: string;
   statusCode: number;
 }
+
+export interface IPaginationRequest {
+  pageIndex?: number;
+  pageSize?: number;
+}
