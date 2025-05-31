@@ -20,8 +20,6 @@ const baseQuery = fetchBaseQuery({
   prepareHeaders(headers, api) {
     const { accessToken } = getTokens();
     if (accessToken) headers.set("Authorization", `Bearer ${accessToken}`);
-    const secretKey = getFromLocalStorage<string>("X-Secret-Key");
-    if (secretKey) headers.set("X-Secret-Key", secretKey);
   },
 });
 
