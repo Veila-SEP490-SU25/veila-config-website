@@ -4,6 +4,8 @@ import { Roboto_Mono, Source_Code_Pro } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/providers/theme.provider";
 import { StoreProvider } from "@/providers/store.provider";
+import { Toaster } from "@/components/ui/sonner";
+import { AuthProvider } from "@/providers/auth.provider";
 
 const sourceCodePro = Source_Code_Pro({
   variable: "--font-source-code-pro",
@@ -27,8 +29,18 @@ export default function RootLayout({
       <body
         className={`${sourceCodePro.variable} ${robotoMono.variable} antialiased`}
       >
-        <ThemeProvider attribute="class" defaultTheme="light">
-          <StoreProvider>{children}</StoreProvider>
+        <ThemeProvider attribute="class" enableSystem>
+          <StoreProvider>
+            <AuthProvider>{children}</AuthProvider>
+          </StoreProvider>
+          <Toaster
+            position="top-right"
+            duration={3500}
+            expand={true}
+            visibleToasts={3}
+            gap={5}
+            richColors={true}
+          />
         </ThemeProvider>
       </body>
     </html>
