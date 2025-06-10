@@ -29,7 +29,7 @@ export default function RootLayout({
       <body
         className={`${sourceCodePro.variable} ${robotoMono.variable} antialiased`}
       >
-        <ThemeProvider attribute="class" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="light">
           <StoreProvider>
             <AuthProvider>{children}</AuthProvider>
           </StoreProvider>
