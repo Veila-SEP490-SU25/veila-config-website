@@ -42,3 +42,14 @@ jobs:
             -p 1209:3000 \
             --env-file .env \
             veila-config-website:latest
+  cleanup:
+    name: Cleanup Old Containers
+    runs-on: [veila]
+    needs: deploy
+    steps:
+      - name: Remove old containers
+        run: |
+          docker image prune -f || true
+          docker volume prune -f || true
+          docker network prune -f || true
+          doocker system prune -f || true
