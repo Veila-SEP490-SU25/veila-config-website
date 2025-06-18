@@ -59,7 +59,7 @@ export const LoginForm = () => {
               <FormControl>
                 <Input {...field} placeholder="Username" />
               </FormControl>
-              <FormMessage />
+               <FormMessage className="text-xs font-light" />
             </FormItem>
           )}
         />
@@ -72,7 +72,7 @@ export const LoginForm = () => {
               <FormControl>
                 <Input {...field} type="password" placeholder="Password" />
               </FormControl>
-              <FormMessage />
+               <FormMessage className="text-xs font-light" />
             </FormItem>
           )}
         />
