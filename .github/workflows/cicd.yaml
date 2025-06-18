@@ -1,0 +1,44 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    name: Build Docker Image
+    runs-on: [veila]
+    outputs:
+      image_tag: latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create .env file
+        run: echo "${{ secrets.ENV_PRODUCTION }}" > .env
+
+      - name: Build nocache Docker image
+        run: docker build -t veila-config-website:latest --no-cache .
+
+      - name: Build Docker image
+        run: docker build -t veila-config-website:latest .
+
+  deploy:
+    name: Deploy to VPS Docker
+    runs-on: [veila]
+    needs: build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create .env file
+        run: echo "${{ secrets.ENV_PRODUCTION }}" > .env
+
+      - name: Run production container from prebuilt image
+        run: |
+          docker stop veila-config-website || true
+          docker rm veila-config-website || true
+          docker run -d \
+            --name veila-config-website \
+            -p 1209:3000 \
+            --env-file .env \
+            veila-config-website:latest
