@@ -1,5 +1,7 @@
 "use client";
 
+import { CreateProfileDialog } from "@/components/dialogs/profiles/create-profile-dialog";
+import { AppSidebarMenuItem } from "@/components/sidebar/app-sidebar-menu-item";
 import {
   SidebarGroup,
   SidebarGroupAction,
@@ -20,6 +22,7 @@ import { useEffect, useState } from "react";
 export const AppSidebarContent = () => {
   const [getProfiles, { isLoading }] = useLazyGetProfilesQuery();
   const [profiles, setProfiles] = useState<IProfile[]>([]);
+  const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
 
   const fetchProfiles = async () => {
     try {
@@ -45,6 +48,7 @@ export const AppSidebarContent = () => {
       <SidebarGroupAction
         title="Add Profile"
         className="hover:bg-black hover:text-white rounded-full"
+        onClick={() => setIsCreateDialogOpen(true)}
       >
         <PlusIcon />
       </SidebarGroupAction>
@@ -67,31 +71,31 @@ export const AppSidebarContent = () => {
           <SidebarMenu>
             {profiles.length > 0 ? (
               profiles.map((item) => (
-                <SidebarMenuItem key={item.id}>
-                  <SidebarMenuButton asChild className="cursor-pointer">
-                    <Link href="/">{item.name}</Link>
-                  </SidebarMenuButton>
-                  <SidebarMenuAction
-                    title="Delete Profile"
-                    className="hover:bg-red-500 hover:text-white rounded-full"
-                  >
-                    <Trash2 />
-                  </SidebarMenuAction>
-                </SidebarMenuItem>
+                <AppSidebarMenuItem
+                  key={item.id}
+                  profile={item}
+                  onDelete={fetchProfiles}
+                />
               ))
             ) : (
               <SidebarMenuItem>
-                <SidebarMenuButton>
-                  <Link href="/profiles/create" className="flex items-center">
-                    <Plus className="mr-2 w-4 h-4" />
-                    Create Profile
-                  </Link>
+                <SidebarMenuButton
+                  onClick={() => setIsCreateDialogOpen(true)}
+                  className="cursor-pointer"
+                >
+                  <Plus className="mr-2 w-4 h-4" />
+                  Create Profile
                 </SidebarMenuButton>
               </SidebarMenuItem>
             )}
           </SidebarMenu>
         )}
       </SidebarGroupContent>
+      <CreateProfileDialog
+        open={isCreateDialogOpen}
+        setOpen={setIsCreateDialogOpen}
+        onCreate={fetchProfiles}
+      />
     </SidebarGroup>
   );
 };
