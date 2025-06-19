@@ -89,9 +89,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           saveTokens(accessToken, refreshToken);
           setIsAuthenticated(true);
           setToLocalStorage("isAuthenticated", true);
-          if (pathname !== "/") {
-            router.push("/");
-          }
+          router.push("/");
         } else {
           toast.error("Đăng nhập thất bại.", {
             description: message || "Vui lòng thử lại sau.",
@@ -117,6 +115,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (authCheckRef.current) return;
 
     const checkAuth = async () => {
+      console.log("Checking authentication...");
       if (!accessToken || !refreshToken) {
         if (isAuthenticated) {
           logout();
@@ -145,11 +144,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       } catch (error) {
         console.log(error);
       }
-
-      if (accessToken || isAuthenticated) {
-        checkAuth();
-      }
     };
+
+    if (accessToken || isAuthenticated) {
+      checkAuth();
+    }
   }, [accessToken, refreshToken, isAuthenticated]);
 
   return (

@@ -6,7 +6,7 @@ export interface IItemResponse<T> {
 
 export interface IListResponse<T> {
   message: string;
-  statusCode: string;
+  statusCode: number;
   items: T[];
   pageSize: number;
   pageIndex: number;
