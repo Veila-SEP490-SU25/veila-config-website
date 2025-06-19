@@ -8,15 +8,13 @@ import {
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useLazyGetProfilesQuery } from "@/services/apis";
 import { IProfile } from "@/services/types";
-import { Plus, PlusIcon, Trash2 } from "lucide-react";
-import Link from "next/link";
+import { Plus, PlusIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export const AppSidebarContent = () => {
@@ -56,13 +54,12 @@ export const AppSidebarContent = () => {
         {isLoading ? (
           <SidebarMenu>
             <SidebarMenuItem>
-              <div className="w-full grid grid-cols-4 gap-2">
+              <div className="w-full grid grid-cols-6 gap-2">
                 <div className="col-span-1">
                   <Skeleton className="aspect-square w-full rounded-full bg-gray-300" />
                 </div>
-                <div className="col-span-3 flex flex-col items-start justify-center gap-2">
-                  <Skeleton className="h-1/2 w-full bg-gray-300" />
-                  <Skeleton className="h-1/2 w-2/3 bg-gray-300" />
+                <div className="col-span-5 flex flex-col items-start justify-center gap-2">
+                  <Skeleton className="h-full w-full bg-gray-300" />
                 </div>
               </div>
             </SidebarMenuItem>
