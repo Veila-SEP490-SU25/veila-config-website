@@ -2,6 +2,7 @@
 
 import { DeleteConfirmDialog } from "@/components/dialogs/delete-confirm-dialog";
 import { CreateRecordDialog } from "@/components/dialogs/records/create-record-dialog";
+import { RecordsCard } from "@/components/records/records-card";
 import { RecordsTextCard } from "@/components/records/records-text-card";
 import { Button } from "@/components/ui/button";
 import {
@@ -227,8 +228,10 @@ export const ProfileCard = () => {
           ) : (
             <div className="p-4 w-full flex item-center">
               {records.length > 0 ? (
-                <div className="w-[80%] grid grid-cols-1 md:grid-cols-2 gap-2 mx-auto">
-                  <div></div>
+                <div className="w-[90%] grid grid-cols-1 md:grid-cols-2 gap-2 mx-auto">
+                  <div className="w-full col-span-1">
+                    <RecordsCard records={records} />
+                  </div>
                   <div className="w-full col-span-1">
                     <RecordsTextCard records={records} />
                   </div>

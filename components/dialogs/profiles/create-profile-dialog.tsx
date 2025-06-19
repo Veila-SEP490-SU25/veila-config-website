@@ -38,7 +38,7 @@ export const CreateProfileDialog = ({
         setOpen(false);
         onCreate();
         toast.success("Profile created successfully");
-        router.push(`profiles/${item.id}`);
+        router.push(`/profiles/${item.id}`);
       } else {
         toast.error("Failed to create profile", {
           description: message || "Please try again later.",
