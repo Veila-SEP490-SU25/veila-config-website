@@ -228,14 +228,20 @@ export const ProfileCard = () => {
           ) : (
             <div className="p-4 w-full flex item-center">
               {records.length > 0 ? (
-                <div className="w-[90%] grid grid-cols-1 md:grid-cols-2 gap-2 mx-auto">
-                  <div className="w-full col-span-1">
-                    <RecordsCard records={records} />
+                profile && (
+                  <div className="w-[90%] grid grid-cols-1 md:grid-cols-2 gap-2 mx-auto">
+                    <div className="w-full col-span-1">
+                      <RecordsCard
+                        records={records}
+                        onChange={fetchRecords}
+                        secret={profile.secret}
+                      />
+                    </div>
+                    <div className="w-full col-span-1">
+                      <RecordsTextCard records={records} />
+                    </div>
                   </div>
-                  <div className="w-full col-span-1">
-                    <RecordsTextCard records={records} />
-                  </div>
-                </div>
+                )
               ) : (
                 <div className="text-gray-500 text-center w-full">
                   This profile has records found

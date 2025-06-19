@@ -8,14 +8,27 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  useDeleteRecordMutation,
+  useUpdateRecordMutation,
+} from "@/services/apis";
 import { IRecord } from "@/services/types";
 import { Pencil, Trash2 } from "lucide-react";
 
 interface RecordsCardProps {
+  secret: string;
   records: IRecord[];
+  onChange: () => void;
 }
 
-export const RecordsCard = ({ records }: RecordsCardProps) => {
+export const RecordsCard = ({
+  records,
+  onChange,
+  secret,
+}: RecordsCardProps) => {
+  const [deleteRecord, { isLoading: isDeleting }] = useDeleteRecordMutation();
+  const [updateRecord, { isLoading: isUpdating }] = useUpdateRecordMutation();
+
   return (
     <Card className="w-full h-full overflow-hidden p-0">
       <Table className="w-full">

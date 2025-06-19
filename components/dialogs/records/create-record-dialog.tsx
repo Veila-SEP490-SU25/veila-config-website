@@ -80,7 +80,7 @@ export const CreateRecordDialog = ({
           <span>Create Record</span>
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="max-w-4xl max-h-[90vh]">
         <DialogHeader>
           <DialogTitle>Create New Record</DialogTitle>
         </DialogHeader>
