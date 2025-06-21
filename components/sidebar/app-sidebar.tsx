@@ -18,7 +18,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-const AppSidebar = () => {
+export default function AppSidebar() {
   const { isAuthenticating, logout, currentUser, isAuthenticated } = useAuth();
   const router = useRouter();
   useEffect(() => {
@@ -86,6 +86,4 @@ const AppSidebar = () => {
       </SidebarFooter>
     </Sidebar>
   );
-};
-
-export default AppSidebar;
+}
