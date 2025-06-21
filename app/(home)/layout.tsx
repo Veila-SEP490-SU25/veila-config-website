@@ -1,4 +1,5 @@
-import { AppSidebar } from "@/components/sidebar/app-sidebar";
+
+import AppSidebar from "@/components/sidebar/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { ReactNode } from "react";
 
@@ -14,5 +15,3 @@ const HomeLayout = ({ children }: { children: ReactNode }) => {
     </div>
   );
 };
-
-export default HomeLayout;
