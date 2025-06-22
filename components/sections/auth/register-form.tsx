@@ -54,7 +54,7 @@ export const RegisterForm = () => {
   const handleSubmit = async (values: z.infer<typeof registerSchema>) => {
     console.log("Form submitted with values:", values);
     try {
-      const { item, message, statusCode } = await registerMutation({
+      const { message, statusCode } = await registerMutation({
         username: values.username,
         password: values.password,
         fullName: values.fullName,
@@ -136,8 +136,8 @@ export const RegisterForm = () => {
             </FormItem>
           )}
         />
-        <Button variant="default" type="submit" className="w-full rounded-full">
-          Register
+        <Button variant="default" type="submit" className="w-full rounded-full" disabled={isLoading}>
+          {isLoading ? "Registering..." : "Register"}
         </Button>
       </form>
     </Form>

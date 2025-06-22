@@ -15,14 +15,14 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useLazyGetProfilesQuery } from "@/services/apis";
 import { IProfile } from "@/services/types";
 import { Plus, PlusIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export const AppSidebarContent = () => {
   const [getProfiles, { isLoading }] = useLazyGetProfilesQuery();
   const [profiles, setProfiles] = useState<IProfile[]>([]);
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
 
-  const fetchProfiles = async () => {
+  const fetchProfiles = useCallback(async () => {
     try {
       const { items, statusCode } = await getProfiles({
         pageIndex: 1,
@@ -34,11 +34,11 @@ export const AppSidebarContent = () => {
     } catch (error) {
       console.error("Error fetching profiles:", error);
     }
-  };
+  }, [getProfiles]);
 
   useEffect(() => {
     fetchProfiles();
-  }, []);
+  }, [fetchProfiles]);
 
   return (
     <SidebarGroup>
