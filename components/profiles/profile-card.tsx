@@ -25,7 +25,7 @@ import {
 import { IProfile, IRecord } from "@/services/types";
 import { Copy, Eye, EyeClosed, RefreshCw, Trash2 } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 
 export const ProfileCard = () => {
@@ -43,7 +43,7 @@ export const ProfileCard = () => {
   const [isShowSecret, setIsShowSecret] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
-  const fetchProfile = async () => {
+  const fetchProfile = useCallback(async () => {
     try {
       const { item, statusCode, message } = await getProfile({
         profileId: id,
@@ -59,9 +59,9 @@ export const ProfileCard = () => {
     } catch (error) {
       console.error("Error fetching profile:", error);
     }
-  };
+  }, [id, getProfile, router]);
 
-  const fetchRecords = async () => {
+  const fetchRecords = useCallback(async () => {
     try {
       if (!profile) return;
       const { items, statusCode, message } = await getRecords({
@@ -77,9 +77,9 @@ export const ProfileCard = () => {
     } catch (error) {
       console.error("Error fetching records:", error);
     }
-  };
+  }, [profile, getRecords]);
 
-  const handleCopySecret = () => {
+  const handleCopySecret = useCallback(() => {
     if (profile) {
       navigator.clipboard
         .writeText(profile.secret)
@@ -91,9 +91,9 @@ export const ProfileCard = () => {
           toast.error("Failed to copy secret");
         });
     }
-  };
+  }, [profile]);
 
-  const handleDelete = async () => {
+  const handleDelete = useCallback(async () => {
     try {
       if (!profile) return;
       const { statusCode, message } = await deleteProfile({
@@ -110,9 +110,9 @@ export const ProfileCard = () => {
     } catch (error) {
       console.error("Error delete profile", error);
     }
-  };
+  }, [profile, deleteProfile, router]);
 
-  const handleSecretChange = async () => {
+  const handleSecretChange = useCallback(async () => {
     try {
       if (!profile) return;
       const { item, statusCode, message } = await changeSecret({
@@ -129,15 +129,15 @@ export const ProfileCard = () => {
     } catch (error) {
       console.error("Error changing secret:", error);
     }
-  };
+  }, [profile, changeSecret]);
 
   useEffect(() => {
     if (id) fetchProfile();
-  }, [id, router]);
+  }, [id, router, fetchProfile]);
 
   useEffect(() => {
     if (profile) fetchRecords();
-  }, [profile]);
+  }, [profile, fetchRecords]);
 
   return (
     <Card className="font-source">
