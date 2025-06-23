@@ -10,7 +10,7 @@ export interface IListResponse<T> {
   items: T[];
   pageSize: number;
   pageIndex: number;
-  totolItems: number;
+  totalItems: number;
   totalPages: number;
   hasNextPage: boolean;
   hasPreviousPage: boolean;

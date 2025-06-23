@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { AppSidebarContent } from "@/components/sidebar/app-sidebar-content";
 import { Separator } from "@/components/ui/separator";
@@ -15,9 +15,19 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useAuth } from "@/providers/auth.provider";
 import { LogOutIcon, Settings, User2 } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export const AppSidebar = () => {
-  const { isAuthenticating, logout, currentUser } = useAuth();
+  const { isAuthenticating, logout, currentUser, isAuthenticated } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isAuthenticating) return;
+    if (!isAuthenticated) {
+      router.push("/login");
+    }
+  }, [isAuthenticated, router, isAuthenticating]);
 
   return (
     <Sidebar
