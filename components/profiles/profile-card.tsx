@@ -2,6 +2,7 @@
 
 import { DeleteConfirmDialog } from "@/components/dialogs/delete-confirm-dialog";
 import { CreateRecordDialog } from "@/components/dialogs/records/create-record-dialog";
+import { ProfileInfo } from "@/components/profiles/profile-info";
 import { RecordsCard } from "@/components/records/records-card";
 import { RecordsTextCard } from "@/components/records/records-text-card";
 import { Button } from "@/components/ui/button";
@@ -197,6 +198,9 @@ export const ProfileCard = () => {
                     </Button>
                   </div>
                 </div>
+              </div>
+              <div className="w-full p-2">
+                <ProfileInfo secret={profile.secret}/>
               </div>
             </CardDescription>
             <DeleteConfirmDialog
