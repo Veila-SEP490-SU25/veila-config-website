@@ -56,11 +56,12 @@ export const recordApi = createApi({
       IDeleteRecordRequest
     >({
       query: ({ secret, key }) => ({
-        url: `/record/${key}`,
+        url: `/record`,
         method: "DELETE",
         headers: {
           "X-Secret-Key": secret,
         },
+        body: { key },
       }),
     }),
   }),
