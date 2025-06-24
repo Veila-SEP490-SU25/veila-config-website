@@ -108,7 +108,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setCurrentUser(null);
     setToLocalStorage("isAuthenticated", false);
     setToLocalStorage("currentUser", null);
-    router.push("/login");
+    router.replace("/login");
   }, [revokeTokens, setIsAuthenticated, setCurrentUser, router]);
 
   useEffect(() => {

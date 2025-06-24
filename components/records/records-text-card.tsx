@@ -52,7 +52,7 @@ export const RecordsTextCard = ({ records }: RecordsTextCardProps) => {
   };
 
   return (
-    <Card className="w-full h-fit bg-gray-100">
+    <Card className="w-full bg-gray-100 h-full">
       <CardHeader className="flex items-center justify-start gap-2">
         <Button variant="outline" size="icon" onClick={handleCopy}>
           <Copy />
@@ -63,7 +63,7 @@ export const RecordsTextCard = ({ records }: RecordsTextCardProps) => {
       </CardHeader>
       <CardContent>
         {records.map((record) => (
-          <p key={record.id}>{`${record.key}=${record.value}`}</p>
+          <p key={record.id} className="w-full break-words p-1">{`${record.key}=${record.value}`}</p>
         ))}
       </CardContent>
     </Card>

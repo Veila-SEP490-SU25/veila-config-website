@@ -63,17 +63,16 @@ export const RecordsCard = ({
       <Table className="w-full">
         <TableHeader>
           <TableRow>
-            <TableHead className="text-center">Key</TableHead>
-            <TableHead className="text-center">Value</TableHead>
-            <TableHead className="text-center">Action</TableHead>
+            <TableHead>Action</TableHead>
+            <TableHead>Key</TableHead>
+            <TableHead>Value</TableHead>
+            
           </TableRow>
         </TableHeader>
         <TableBody>
           {records.map((record) => (
-            <TableRow key={record.id}>
-              <TableCell>{record.key}</TableCell>
-              <TableCell className="text-wrap">{record.value}</TableCell>
-              <TableCell>
+            <TableRow key={record.id} className="max-w-full">
+              <TableCell className="w-1/5">
                 <div className="w-full flex items-center justify-center gap-2">
                   <Button variant="outline" size="icon">
                     <Pencil />
@@ -91,6 +90,9 @@ export const RecordsCard = ({
                   </Button>
                 </div>
               </TableCell>
+              <TableCell className="w-2/5">{record.key}</TableCell>
+              <TableCell className="w-2/5 break-words">{record.value}</TableCell>
+              
             </TableRow>
           ))}
         </TableBody>

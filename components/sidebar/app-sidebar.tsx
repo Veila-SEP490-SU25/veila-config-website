@@ -35,6 +35,7 @@ export const AppSidebar = () => {
       variant="sidebar"
       collapsible="icon"
       className="font-source bg-white"
+      suppressHydrationWarning
     >
       <SidebarHeader>
         <SidebarMenu>
@@ -71,17 +72,18 @@ export const AppSidebar = () => {
         ) : (
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton className="cursor-pointer">
-                <User2 />
-                <span>{currentUser?.username}</span>
+              <SidebarMenuButton
+                className="cursor-pointer text-red-500 hover:bg-red-500 hover:text-white"
+                onClick={logout}
+              >
+                <LogOutIcon className="" />
+                <span className="cursor-pointer">Logout</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton className="cursor-pointer text-red-500 hover:bg-red-500 hover:text-white">
-                <LogOutIcon className="" />
-                <span onClick={logout} className="cursor-pointer">
-                  Logout
-                </span>
+              <SidebarMenuButton className="cursor-pointer">
+                <User2 />
+                <span>{currentUser?.username}</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>

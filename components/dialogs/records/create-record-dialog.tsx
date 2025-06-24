@@ -74,7 +74,7 @@ export const CreateRecordDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogTrigger>
+      <DialogTrigger suppressHydrationWarning>
         <Button className="w-full flex items-center gap-2">
           <Plus />
           <span>Create Record</span>
