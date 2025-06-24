@@ -75,12 +75,6 @@ export const UpdateRecordDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogTrigger suppressHydrationWarning>
-        <Button className="w-full flex items-center gap-2">
-          <Plus />
-          <span>Create Record</span>
-        </Button>
-      </DialogTrigger>
       <DialogContent className="max-w-4xl max-h-[90vh]">
         <DialogHeader>
           <DialogTitle>Create New Record</DialogTitle>
