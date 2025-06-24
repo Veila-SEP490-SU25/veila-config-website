@@ -1,6 +1,7 @@
 "use client";
 
 import { DeleteConfirmDialog } from "@/components/dialogs/delete-confirm-dialog";
+import { UpdateRecordDialog } from "@/components/dialogs/records/update-record-dialog";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -33,9 +34,9 @@ export const RecordsCard = ({
   secret,
 }: RecordsCardProps) => {
   const [deleteRecord, { isLoading: isDeleting }] = useDeleteRecordMutation();
-  const [updateRecord, { isLoading: isUpdating }] = useUpdateRecordMutation();
   const [selectedRecord, setSelectedRecord] = useState<IRecord | null>(null);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [isUpdateDialogOpen, setIsUpdateDialogOpen] = useState(false);
 
   const handleDeleteRecord = useCallback(async () => {
     if (!selectedRecord) return;
@@ -66,7 +67,6 @@ export const RecordsCard = ({
             <TableHead>Action</TableHead>
             <TableHead>Key</TableHead>
             <TableHead>Value</TableHead>
-            
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -74,7 +74,14 @@ export const RecordsCard = ({
             <TableRow key={record.id} className="max-w-full">
               <TableCell className="w-1/5">
                 <div className="w-full flex items-center justify-center gap-2">
-                  <Button variant="outline" size="icon">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => {
+                      setSelectedRecord(record);
+                      setIsUpdateDialogOpen(true);
+                    }}
+                  >
                     <Pencil />
                   </Button>
                   <Button
@@ -91,8 +98,9 @@ export const RecordsCard = ({
                 </div>
               </TableCell>
               <TableCell className="w-2/5">{record.key}</TableCell>
-              <TableCell className="w-2/5 break-words">{record.value}</TableCell>
-              
+              <TableCell className="w-2/5 break-words">
+                {record.value}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -102,6 +110,13 @@ export const RecordsCard = ({
         open={isDeleteDialogOpen}
         setOpen={setIsDeleteDialogOpen}
       />
+      {selectedRecord && <UpdateRecordDialog
+        record={selectedRecord}
+        secret={secret}
+        open={isUpdateDialogOpen}
+        setOpen={setIsUpdateDialogOpen}
+        onUpdate={onChange}
+      />}
     </Card>
   );
 };

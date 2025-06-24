@@ -42,12 +42,12 @@ export const recordApi = createApi({
       IUpdateRecordRequest
     >({
       query: ({ secret, key, value }) => ({
-        url: `/record/${key}`,
+        url: `/record`,
         method: "PUT",
         headers: {
           "X-Secret-Key": secret,
         },
-        body: { value },
+        body: { key, value },
       }),
     }),
 
